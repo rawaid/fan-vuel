@@ -12,6 +12,7 @@
       </div>
       <Scoring />
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import Shotchart from './components/Shotchart'
 import Scoring from './components/Scoring'
 import PlayByPlay from './components/PlayByPlay'
 import Stats from './components/Stats'
+import Footer from './components/Footer'
 
 export default {
   name: 'App',
@@ -31,7 +33,8 @@ export default {
     Shotchart, 
     Scoring, 
     PlayByPlay,
-    Stats
+    Stats,
+    Footer
   }
 }
 </script>
