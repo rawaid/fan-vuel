@@ -4,23 +4,23 @@
     <div class="shotchart-container">
       <div class="shotchart-container__header">
         <div class="shotchart-container__header--away">
-          <span class="shotchart-container__awayCity">Golden State</span>
-          <span class="shotchart-container__awayTeam">Warriors</span>
+          <span class="shotchart-container__awayCity">{{ shotchart.away_team.location }} </span>
+          <span class="shotchart-container__awayTeam">{{ shotchart.away_team.name }} </span>
         </div>
 
-        <div class="shotchart-container__awayScore">96</div>
+        <div class="shotchart-container__awayScore">{{ shotchart.away_team.score }}</div>
 
         <div class="shotchart-container__header--info">
-          <span class="shotchart-container__header--time">7:34 4th</span>
-          <span class="shotchart-container__header--location">Oracle Arena</span>
-          <span class="shotchart-container__header--location">Oakland, CA</span>
+          <span class="shotchart-container__header--time">{{ shotchart.time_left }}</span>
+          <span class="shotchart-container__header--location">{{ shotchart.arena }}</span>
+          <span class="shotchart-container__header--location">{{ shotchart.location }}</span>
         </div>
 
-        <div class="shotchart-container__homeScore">81</div>
+        <div class="shotchart-container__homeScore">{{ shotchart.home_team.score }}</div>
 
         <div class="shotchart-container__header--home">
-            <span class="shotchart-container__homeCity">Oklahoma City</span>
-            <span class="shotchart-container__homeTeam">Thunder</span>
+            <span class="shotchart-container__homeCity">{{ shotchart.home_team.location }}</span>
+            <span class="shotchart-container__homeTeam">{{ shotchart.home_team.name }}</span>
         </div>
       </div>
 
@@ -75,16 +75,23 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/plays").then((response) => {
-  console.log(response.data)
-})
+// Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/game_stats").then((response) => {
+//   console.log('game stats', response.data)
+// })
 
 export default {
-  name: 'Shotchart',
+  name: 'app',
   data () {
     return {
-      msg: 'ur header'
+      shotchart: []
     }
+  }, 
+  mounted() {
+    Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/game_stats").then((response) => {
+      this.shotchart = response.data;
+      console.log('game stats', this.shotchart)
+
+    })
   }
 }
 </script>
