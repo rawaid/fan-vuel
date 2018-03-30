@@ -40,62 +40,30 @@
             </div>
       </div>
 
-      <!-- <div class="global-footer__currentGame">
-          <div class="global-footer__teams">
-              <div class="global-footer__team">Warriors</div>
-              <div class="global-footer__team">Thunder</div>
-              <span class="global-footer__time">7:34 4th - TV: ESPN</span>
-            </div>
-            
-            <div class="global-footer__score">
-                <span class="global-footer__points">96</span>
-                <span class="global-footer__points">81</span>
-            </div>
-      
-            <span class="global-footer__teamAbbr">GSW</span>
-      
-            <div class="global-footer__players">
-              <div class="global-footer__away">
-                  <span class="global-footer__player">S. Curry, PG</span>
-                  <span class="global-footer__stats">23 points, 6 assists</span>
-              </div>
-            </div>
-      
-            <span class="global-footer__teamAbbr">OKC</span>
-      
-            <div class="global-footer__players">
-              <div class="global-footer__home">
-                  <span class="global-footer__player">K. Durant, SF</span>
-                  <span class="global-footer__stats">30 points, 9 rebounds</span>
-              </div>
-            </div>
-      </div> -->
-     
-
-        <div class="global-footer__otherGames">
-          <div class="global-footer__otherTeams">
-              <div class="global-footer__team">CHI</div>
-              <div class="global-footer__team">BOS</div>
-              <span class="global-footer__time">6:33 3rd</span>
-          </div>
-
-          <div class="global-footer__otherScore">
-              <span class="global-footer__points">56</span>
-              <span class="global-footer__points">54</span>
-          </div>
-
-          <div class="global-footer__otherTeams">
-              <div class="global-footer__team">ATL</div>
-              <div class="global-footer__team">MEM</div>
-              <span class="global-footer__time">12:00 2nd</span>
-          </div>
-
-          <div class="global-footer__otherScore">
-              <span class="global-footer__points">26</span>
-              <span class="global-footer__points">24</span>
-          </div>
-
+      <div class="global-footer__otherGames">
+        <div class="global-footer__otherTeams">
+            <div class="global-footer__team">CHI</div>
+            <div class="global-footer__team">BOS</div>
+            <span class="global-footer__time">6:33 3rd</span>
         </div>
+
+        <div class="global-footer__otherScore">
+            <span class="global-footer__points">56</span>
+            <span class="global-footer__points">54</span>
+        </div>
+
+        <div class="global-footer__otherTeams">
+            <div class="global-footer__team">ATL</div>
+            <div class="global-footer__team">MEM</div>
+            <span class="global-footer__time">12:00 2nd</span>
+        </div>
+
+        <div class="global-footer__otherScore">
+            <span class="global-footer__points">26</span>
+            <span class="global-footer__points">24</span>
+        </div>
+
+      </div>
       <span class="global-footer__right"><i class="fas fa-angle-right"></i></span>
 
   </div>
@@ -122,7 +90,6 @@ export default {
     Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/footer_scoreboard").then((response) => {
       this.dataLoaded = true;
       this.scoreboard = response.data;
-      console.log('sb', this.scoreboard);
     })
   }
 }
