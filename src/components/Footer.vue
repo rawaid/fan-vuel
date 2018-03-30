@@ -9,7 +9,38 @@
 
       <span class="global-footer__left"><i class="fas fa-angle-left"></i></span>
 
-      <div class="global-footer__currentGame">
+      <div class="global-footer__currentGame" v-for="game in scoreboard" v-bind:key="game.quarter">
+          <div class="global-footer__teams">
+              <div class="global-footer__team">{{ game.away_team.abbrev }}</div>
+              <div class="global-footer__team">{{ game.home_team.abbrev }}</div>
+              <span class="global-footer__time">{{ game.time_left }}</span>
+            </div>
+            
+            <div class="global-footer__score">
+                <span class="global-footer__points">{{ game.away_team.score }}</span>
+                <span class="global-footer__points">{{ game.home_team.score }}</span>
+            </div>
+      
+            <span class="global-footer__teamAbbr">{{ game.top_performers[0].team }}</span>
+      
+            <div class="global-footer__players">
+              <div class="global-footer__away">
+                  <span class="global-footer__player">{{ game.top_performers[0].name }}, {{ game.top_performers[0].position }}</span>
+                  <span class="global-footer__stats">{{ game.top_performers[0].points }} points, {{ game.top_performers[0].rebounds }} rebounds</span>
+              </div>
+            </div>
+      
+            <span class="global-footer__teamAbbr">{{ game.top_performers[1].team }}</span>
+      
+            <div class="global-footer__players">
+              <div class="global-footer__home">
+                   <span class="global-footer__player">{{ game.top_performers[1].name }}, {{ game.top_performers[1].position }}</span>
+                  <span class="global-footer__stats">{{ game.top_performers[1].points }} points, {{ game.top_performers[1].rebounds }} rebounds</span>
+              </div>
+            </div>
+      </div>
+
+      <!-- <div class="global-footer__currentGame">
           <div class="global-footer__teams">
               <div class="global-footer__team">Warriors</div>
               <div class="global-footer__team">Thunder</div>
@@ -38,7 +69,7 @@
                   <span class="global-footer__stats">30 points, 9 rebounds</span>
               </div>
             </div>
-      </div>
+      </div> -->
      
 
         <div class="global-footer__otherGames">
@@ -79,16 +110,20 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/plays").then((response) => {
-  // console.log(response.data)
-})
-
 export default {
-  name: 'Footer',
+  name: 'Header',
   data () {
     return {
-      msg: 'ur header'
+      scoreboard: [],
+      dataLoaded: false
     }
+  }, 
+  mounted() {
+    Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/footer_scoreboard").then((response) => {
+      this.dataLoaded = true;
+      this.scoreboard = response.data;
+      console.log('sb', this.scoreboard);
+    })
   }
 }
 </script>
@@ -123,6 +158,7 @@ $other-games: #a8acb0;
   z-index: 1000;
   height: 101px;
   background: $footer-gray;
+  overflow-y: hidden;
   overflow-x: scroll;
   color: $white;
   -webkit-font-smoothing: antialiased;
@@ -133,11 +169,11 @@ $other-games: #a8acb0;
     height: 22px;
     padding-left: 27px;
     padding-top: 5px;
-    width: 120%;
+    width: 100%;
   }
 
   &__league {
-    padding: 5px 120px 6px 15px;
+    padding: 5px 116px 6px 15px;
   }
 
   .current {
@@ -168,7 +204,8 @@ $other-games: #a8acb0;
 
   &__currentGame {
     background-color: $footer-current;
-    padding: 11px 50px 11px 15px;
+    padding: 11px 48px 11px 15px;
+    border-right: 1px solid $other-games;
   }
 
   &__otherGames {
