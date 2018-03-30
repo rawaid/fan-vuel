@@ -32,26 +32,6 @@
           Show: <span class="shotchart-container__toggle--selected">Recent Shots <i class="fas fa-angle-down"></i></span>
         </div>
 
-        <!-- <div class="shotchart-container__awayStats">
-          <div class="shotchart-container__statType">
-            FG%
-          </div>
-          <div class="shotchart-container__stat">
-            55.7%
-          </div>
-          <div class="shotchart-container__statType">
-            FT%
-          </div>
-          <div class="shotchart-container__stat">
-            60.0%
-          </div>
-          <div class="shotchart-container__statType">
-            3P%
-          </div>
-          <div class="shotchart-container__stat">
-            55.5%
-          </div>
-        </div> -->
         <div class="shotchart-container__bottom">
           <div class="shotchart-container__awayStats">
             <ul v-for="shot in shotchart.away_team.shooting_stats">
