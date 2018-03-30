@@ -97,25 +97,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+@import "../styles/colors.scss";
 
-$fanduel-navy: #2d363c;
-$fanduel-bg: #bcbcbc;
-$fanduel-highlight: #505a61;
-$warriors: #fdb92c;
-$thunder: #127dc2;
-$container-header: #000000;
-$white: #fff;
-$border: #e5e5e5;
-$spacer: #f2f2f2;
-$light-gray: #cccccc;
-$fd-gray: #333333;
-$satan-gray: #666666;
-$highlight: #fff8ea;
-$selected-green: #669933;
-$footer-gray: #505961;
-$footer-current: #616a71;
-$location-gray: #858585;
-$other-games: #a8acb0;
 
 .global-footer {
   position: sticky;

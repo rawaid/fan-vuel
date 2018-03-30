@@ -19,22 +19,6 @@
       <span class="pbp-container__score">{{play.away_score}}-{{play.home_score}}, GS</span>
     </div>
 
-    <!-- <div class="pbp-container__row">
-      <div class="pbp-container__headshot">
-        <img src="../img/Curry.png" alt="Stephen Curry"/>
-      </div>
-      <div class="pbp-container__content">
-        <span class="pbp-container__time">
-          7:34 4th
-        </span>
-        <div class="pbp-container__play">
-          <div><span class="pbp-container__player">Stephen Curry</span> makes 13-foot jumper.</div>
-          <div>Assisted by <span class="pbp-container__player">Draymond Green.</span></div>
-        </div>
-      </div>
-      <span class="pbp-container__score">96-81, GS</span>
-    </div> -->
-
   </div>
 </template>
 
@@ -86,25 +70,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-
-$fanduel-navy: #2d363c;
-$fanduel-bg: #bcbcbc;
-$fanduel-highlight: #505a61;
-$warriors: #fdb92c;
-$thunder: #127dc2;
-$container-header: #000000;
-$white: #fff;
-$border: #e5e5e5;
-$spacer: #f2f2f2;
-$light-gray: #cccccc;
-$fd-gray: #333333;
-$satan-gray: #666666;
-$highlight: #fff8ea;
-$selected-green: #669933;
-$footer-gray: #505961;
-$footer-current: #616a71;
-$location-gray: #858585;
-$other-games: #a8acb0;
+@import "../styles/colors.scss";
 
  .pbp-container {
 
