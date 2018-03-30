@@ -277,19 +277,48 @@ export default {
 
  }
 
- @media (max-width: 641px) {
+ @media (max-width: 821px) {
   .shotchart-container__header {
     flex-direction: column;
   }
 
   .shotchart-container {
     height: 100%;
-
+    &__awayStats ul {
+      padding: 0;
+    }
+    &__awayStats,
+    &__homeStats{
+      list-style-type: none;
+      display: inline;
+    }
+    &__bottom {
+      display: block;
+    }
     &__content img {
       padding: 10px;
       width: 80%;
     }
+    &__stat {
+      &--away,
+      &--home {
+
+      &:after {
+        content:""; 
+        height: 0;
+        }
+      }
+    }
+  &__header {
+    &--time,
+    &--location {
+      border: none;
+    }
   }
+
+  }
+
+
 
 }
 
