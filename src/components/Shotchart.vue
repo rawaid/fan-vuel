@@ -75,10 +75,6 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-// Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/game_stats").then((response) => {
-//   console.log('game stats', response.data)
-// })
-
 export default {
   name: 'Shotchart',
   data () {

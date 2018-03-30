@@ -1,6 +1,6 @@
 /* eslint-disable */
 <template>
-   <div>
+   <div v-if="dataLoaded">
       <header class="global-header">
         <div class="global-header__container">
           <section class="logo-container">
@@ -9,11 +9,7 @@
 
           <nav class="primary-nav">
               <ul class="primary-nav__list">
-                <li class="primary-nav__item"><a class="primary-nav__anchor" href="/">Lobby</a></li>
-                <li class="primary-nav__item"><a class="primary-nav__anchor" href="/">Upcoming</a></li>
-                <li class="primary-nav__item selected"><a class="primary-nav__anchor" href="/">Live <i class="fas fa-angle-down"></i>
-                </a></li>
-                <li class="primary-nav__item"><a class="primary-nav__anchor" href="/">History</a></li>
+                <li v-for="item in nav" v-bind:class="{selected: item.title=='Live'}" class="primary-nav__item"><a class="primary-nav__anchor" v-bind:href="item.href">{{item.title}}<i v-if="item.title=='Live'" class="fas fa-angle-down global-header__arrow"></i></a></li>
             </ul>
           </nav>
 
@@ -54,16 +50,19 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/plays").then((response) => {
-  // console.log(response.data)
-})
-
 export default {
   name: 'Header',
   data () {
     return {
-      msg: 'ur header'
+      nav: [],
+      dataLoaded: false
     }
+  }, 
+  mounted() {
+    Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/nav_elements").then((response) => {
+      this.dataLoaded = true;
+      this.nav = response.data;
+    })
   }
 }
 </script>
@@ -90,6 +89,10 @@ $footer-current: #616a71;
 $location-gray: #858585;
 $other-games: #a8acb0;
 
+.selected { 
+  background: $fanduel-highlight;
+}
+
 .global-header {
   position: fixed;
   top: 0;
@@ -109,7 +112,12 @@ $other-games: #a8acb0;
     max-width: 100%;
     margin: 0 auto;
   }
+
+  &__arrow {
+    margin-left: 5px;
+  }
 }
+
 
 .logo-container {
   padding-left: 0;
