@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
 
-    <div class="shotchart-container">
+    <div class="shotchart-container"  v-if="dataLoaded">
       <div class="shotchart-container__header">
         <div class="shotchart-container__header--away">
           <span class="shotchart-container__awayCity">{{ shotchart.away_team.location }} </span>
@@ -80,17 +80,17 @@ Vue.use(VueAxios, axios)
 // })
 
 export default {
-  name: 'app',
+  name: 'Shotchart',
   data () {
     return {
-      shotchart: []
+      shotchart: [],
+      dataLoaded: false
     }
   }, 
   mounted() {
     Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/game_stats").then((response) => {
+      this.dataLoaded = true;
       this.shotchart = response.data;
-      console.log('game stats', this.shotchart)
-
     })
   }
 }

@@ -7,6 +7,10 @@ const sourceMapEnabled = isProduction
   : config.dev.cssSourceMap
 
 module.exports = {
+  build: {
+    assetsPublicPath: '/',
+    assetsSubDirectory: 'static'
+  },
   loaders: utils.cssLoaders({
     sourceMap: sourceMapEnabled,
     extract: isProduction

@@ -1,12 +1,27 @@
 <template>
-  <div class="pbp-container">
+  <div class="pbp-container" v-if="dataLoaded">
     <div class="pbp-container__header">
       Play By Play
     </div>
-
-    <div class="pbp-container__row">
+    
+    <div class="pbp-container__row" v-for="play in plays" v-bind:key="play.id">
       <div class="pbp-container__headshot">
-        <img src="../assets/Curry.png" alt="Stephen Curry"/>
+        <img v-bind:src="'../static/' + play.scoring_player + '.png'"/>
+      </div>
+      <div class="pbp-container__content">
+        <span class="pbp-container__time">
+          {{ play.time_left }}
+        </span>
+        <div class="pbp-container__play">
+          <div><span class="pbp-container__player">{{play.player}}</span> {{play.play}}</div>
+        </div>
+      </div>
+      <span class="pbp-container__score">{{play.away_score}}-{{play.home_score}}, GS</span>
+    </div>
+
+    <!-- <div class="pbp-container__row">
+      <div class="pbp-container__headshot">
+        <img src="../img/Curry.png" alt="Stephen Curry"/>
       </div>
       <div class="pbp-container__content">
         <span class="pbp-container__time">
@@ -18,69 +33,8 @@
         </div>
       </div>
       <span class="pbp-container__score">96-81, GS</span>
-    </div>
+    </div> -->
 
-    <div class="pbp-container__row">
-        <div class="pbp-container__headshot">
-          <img src="../assets/Durant.png" alt="Kevin Durant"/>
-        </div>
-        <div class="pbp-container__content">
-          <span class="pbp-container__time">
-            7:36 4th
-          </span>
-          <div class="pbp-container__play">
-            <div><span class="pbp-container__player">Kevin Durant</span> misses 2-foot layup.</div>
-            <div>Rebounded by <span class="pbp-container__player">Andrew Bogut.</span></div>
-          </div>
-        </div>
-        <span class="pbp-container__score">94-81, GS</span>
-      </div>
-
-      <div class="pbp-container__row highlighted">
-          <div class="pbp-container__headshot">
-            <img src="../assets/Thompson.png" alt="Klay Thompson"/>
-          </div>
-          <div class="pbp-container__content">
-            <span class="pbp-container__time">
-              7:55 4th
-            </span>
-            <div class="pbp-container__play">
-              <div><span class="pbp-container__player">Klay Thompson</span> misses 24-foot jumper.</div>
-              <div>Rebounded by <span class="pbp-container__player">Serge Ibaka.</span></div>
-            </div>
-          </div>
-          <span class="pbp-container__score">94-81, GS</span>
-        </div>
-
-        <div class="pbp-container__row">
-            <div class="pbp-container__headshot">
-              <img src="../assets/Durant.png" alt="Kevin Durant"/>
-            </div>
-            <div class="pbp-container__content">
-              <span class="pbp-container__time">
-                8:17 4th
-              </span>
-              <div class="pbp-container__play">
-                <div><span class="pbp-container__player">Kevin Durant</span> turnover.</div>
-              </div>
-            </div>
-            <span class="pbp-container__score">94-81, GS</span>
-          </div>
-
-          <div class="pbp-container__row">
-            <div class="pbp-container__headshot">
-              <img src="../assets/Curry.png" alt="Stephen Curry"/>
-            </div>
-            <div class="pbp-container__content">
-              <span class="pbp-container__time">
-                8:27 4th
-              </span>
-              <div class="pbp-container__play">
-                <div><span class="pbp-container__player">Stephen Curry</span> makes free throw.</div>
-              </div>
-            </div>
-            <span class="pbp-container__score">94-81, GS</span>
-          </div>
   </div>
 </template>
 
@@ -95,8 +49,37 @@ export default {
   name: 'PlayByPlay',
   data () {
     return {
-      msg: 'ur header'
+      plays: [],
+      dataLoaded: false
     }
+  },
+  mounted() {
+    Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/plays").then((response) => {
+      this.dataLoaded = true;
+      this.plays = response.data;
+
+      function capitalize(value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1);
+      }
+
+      // string manipulation to for the bold player names   
+      for (var x in this.plays) {
+        this.scoringPlayer = this.plays[x].scoring_player.split("_");
+        this.scoringPlayer = capitalize(this.scoringPlayer[0]) + " " + capitalize(this.scoringPlayer[1]);
+        
+        // "Steph Curry in the data feed as the scoring player but Stephen Curry in the description"
+        if (this.scoringPlayer !== "Steph Curry") {
+          this.play = this.plays[x].description.split(this.scoringPlayer);
+        } 
+        if (this.scoringPlayer == "Steph Curry") {
+          this.play = this.plays[x].description.split("Stephen Curry");
+        }
+        this.plays[x].player = this.scoringPlayer;
+        this.plays[x].play = this.play[1];
+      }
+    })
   }
 }
 </script>
@@ -131,6 +114,12 @@ $other-games: #a8acb0;
    height: 100%;
    flex: 1;
 
+    &__row {
+     padding: 10px;
+     display: flex;
+     border-bottom: 1px solid $light-gray;
+   }
+
    &__header{
     text-align: center;
     height: 15px;
@@ -148,11 +137,7 @@ $other-games: #a8acb0;
     background: linear-gradient(to top, $highlight, $white);
   }
 
-   &__row {
-     padding: 10px;
-     display: flex;
-     border-bottom: 1px solid $light-gray;
-   }
+  
 
    &__headshot {
      margin-right: 5px;
