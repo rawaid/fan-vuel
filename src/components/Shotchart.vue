@@ -10,7 +10,7 @@
         <div class="shotchart-container__awayScore">{{ shotchart.away_team.score }}</div>
 
         <div class="shotchart-container__header--info">
-          <span class="shotchart-container__header--time">{{ shotchart.time_left }}</span>
+          <span class="shotchart-container__header--time">{{ shotchart.time_left }} {{ shotchart.quarter }}th</span>
           <span class="shotchart-container__header--location">{{ shotchart.arena }}</span>
           <span class="shotchart-container__header--location">{{ shotchart.location }}</span>
         </div>
@@ -32,7 +32,7 @@
           Show: <span class="shotchart-container__toggle--selected">Recent Shots <i class="fas fa-angle-down"></i></span>
         </div>
 
-        <div class="shotchart-container__awayStats">
+        <!-- <div class="shotchart-container__awayStats">
           <div class="shotchart-container__statType">
             FG%
           </div>
@@ -51,14 +51,25 @@
           <div class="shotchart-container__stat">
             55.5%
           </div>
-        </div>
+        </div> -->
+        <div class="shotchart-container__bottom">
+          <div class="shotchart-container__awayStats">
+            <ul v-for="shot in shotchart.away_team.shooting_stats">
+              <li class="shotchart-container__statType">{{shot.title}}</li>
+              <li class="shotchart-container__stat--away">{{shot.perc}}</li>
+            </ul>
+          </div>
 
-        <div class="shotchart-container__shotchart">
-          <img src="../assets/shotchart.png" alt="Warriors vs Thunder Shotchart"/>
-        </div>
+          <div class="shotchart-container__shotchart">
+            <img src="../assets/shotchart.png" alt="Warriors vs Thunder Shotchart"/>
+          </div>
 
-        <div class="shotchart-container__homeStats">
-          
+          <div class="shotchart-container__homeStats">
+          <ul class="shotchart-container__homeStats" v-for="shot in shotchart.home_team.shooting_stats">
+            <li class="shotchart-container__statType">{{shot.title}}</li>
+            <li class="shotchart-container__stat--home">{{shot.perc}}</li>
+          </ul>
+          </div>
         </div>
 
       </div>
@@ -97,7 +108,7 @@ export default {
 
  .shotchart-container {
    margin: 5px;
-   height: 430px;
+   height: 450px;
    background: $white;
    border-radius: 10px;
 
@@ -207,10 +218,61 @@ export default {
      text-align: center;
    }
 
+   &__bottom {
+     display: flex;
+   }
+
    &__awayStats,
    &__homeStats{
-     display: inline-flex;
-     flex-direction: column;
+    list-style-type: none;
+    display: inline-flex;
+    flex-direction: column;
+   }
+
+   &__awayStats,
+   &__homeStats,
+   &__shotchart {
+     flex: 3;
+   }
+
+   &__awayStats{
+     position: relative;
+ 
+   }
+
+   &__statType {
+     display: block;
+     padding-bottom: 5px;
+   }
+
+   &__stat {
+    display: inline;
+    &--away,
+    &--home {
+      list-style-type: none;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 22px;
+      position: relative;
+      &:after {
+        content:""; 
+        background: $light-gray; 
+        position: absolute; 
+        bottom: -10px; 
+        margin-left: -80px;
+        width: 90px; 
+        height: 1px;
+      }
+    }
+
+
+     &--away {
+      color: $warriors;
+     }
+
+     &--home {
+      color: $thunder;
+     }
    }
 
  }
