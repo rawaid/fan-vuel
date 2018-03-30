@@ -215,5 +215,21 @@ export default {
 
  }
 
+ @media (max-width: 641px) {
+  .shotchart-container__header {
+    flex-direction: column;
+  }
+
+  .shotchart-container {
+    height: 100%;
+
+    &__content img {
+      padding: 10px;
+      width: 80%;
+    }
+  }
+
+}
+
 
 </style>
