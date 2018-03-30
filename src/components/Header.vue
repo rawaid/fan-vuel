@@ -13,7 +13,7 @@
             </ul>
           </nav>
 
-          <nav class="sidebar-nav">
+          <nav class="sidebar-nav" v-bind:class="{active:isActive}">
               <ul class="sidebar-nav__list">
                 <li class="sidebar-nav__item"><a class="sidebar-nav__anchor" href="/">Lobby</a></li>
                 <li class="sidebar-nav__item"><a class="sidebar-nav__anchor" href="/">Upcoming</a></li>
@@ -25,7 +25,7 @@
                 <li class="sidebar-nav__item"><a class="sidebar-nav__anchor" href="/">Add Funds</a></li>
 
             </ul>
-            <button class="sidebarBtn">
+            <button class="sidebarBtn" v-on:click="expand">
               <span></span>
             </button>
           </nav>
@@ -55,9 +55,15 @@ export default {
   data () {
     return {
       nav: [],
-      dataLoaded: false
+      dataLoaded: false,
+      isActive: false
     }
-  }, 
+  },
+  methods: {
+    expand: function(e){
+      this.isActive = !this.isActive;
+    }
+  },
   mounted() {
     Vue.axios.get("https://my-json-server.typicode.com/fanduel/moneyball-fe-challenge-data/nav_elements").then((response) => {
       this.dataLoaded = true;
@@ -70,10 +76,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "../styles/colors.scss";
-
-.selected { 
-  background: $fanduel-highlight;
-}
 
 .global-header {
   position: fixed;
@@ -199,23 +201,9 @@ export default {
     padding-left: 30%;
   }
 
-   .content,
-   .inside-left,
-   .shotchart-container__header {
-     flex-direction: column;
-   }
 
    .global-footer {
      display: none;
-   }
-
-   .shotchart-container {
-     height: 100%;
-
-     &__content img {
-       padding: 10px;
-       width: 80%;
-     }
    }
 
    .active {

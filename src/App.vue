@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-$fanduel-bg: #bcbcbc;
+@import "styles/colors.scss";
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -50,7 +50,6 @@ $fanduel-bg: #bcbcbc;
   height: 100%;
   margin: 0;
   background: $fanduel-bg;
-
 }
 
  .content {
@@ -66,6 +65,27 @@ $fanduel-bg: #bcbcbc;
   .inside-left {
   display: flex;
  }
+
+ @media (max-width: 641px) {
+  .content {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .primary-nav {
+    display: none;
+  }
+
+  .logo-container {
+    padding-left: 30%;
+  }
+
+  .content,
+  .inside-left{
+    flex-direction: column;
+  }
+
+}
 
 
 </style>
