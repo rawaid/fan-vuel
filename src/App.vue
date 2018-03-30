@@ -41,9 +41,11 @@ export default {
 
 <style lang="scss">
 @import "styles/colors.scss";
+@import "src/assets/fonts/GothamMedium.ttf";
+
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Gotham Medium', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;

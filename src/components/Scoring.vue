@@ -57,6 +57,7 @@ export default {
    }
 
    &__item {
+     display: inline-block;
      padding-right: 15px;
      font-size: 11px;
      font-weight: 500;

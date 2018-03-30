@@ -157,7 +157,6 @@ export default {
    &__awayTeam,
    &__homeCity,
    &__homeTeam {
-     font-family: 'Gotham Medium', sans-serif;
      font-size: 20px;
      line-height: 20px;
      text-transform: uppercase;
@@ -257,7 +256,7 @@ export default {
 
  }
 
- @media (max-width: 821px) {
+ @media (max-width: 641px) {
   .shotchart-container__header {
     flex-direction: column;
   }
@@ -297,10 +296,5 @@ export default {
   }
 
   }
-
-
-
 }
-
-
 </style>

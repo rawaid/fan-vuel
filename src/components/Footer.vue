@@ -99,7 +99,6 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/colors.scss";
 
-
 .global-footer {
   position: sticky;
   bottom: 0;

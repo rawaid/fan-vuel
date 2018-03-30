@@ -13,7 +13,8 @@
           {{ play.time_left }}
         </span>
         <div class="pbp-container__play">
-          <div><span class="pbp-container__player">{{play.player}}</span> {{play.play}}</div>
+          <div><span class="pbp-container__player">{{play.player}}</span> {{play.play}}.</div>
+          <div>{{play.assist}}.</div>
         </div>
       </div>
       <span class="pbp-container__score">{{play.away_score}}-{{play.home_score}}, GS</span>
@@ -48,7 +49,7 @@ export default {
         return value.charAt(0).toUpperCase() + value.slice(1);
       }
 
-      // string manipulation to for the bold player names   
+      // string manipulation for the bold player names & easier formatting in the html  
       for (var x in this.plays) {
         this.scoringPlayer = this.plays[x].scoring_player.split("_");
         this.scoringPlayer = capitalize(this.scoringPlayer[0]) + " " + capitalize(this.scoringPlayer[1]);
@@ -60,8 +61,15 @@ export default {
         if (this.scoringPlayer == "Steph Curry") {
           this.play = this.plays[x].description.split("Stephen Curry");
         }
+        this.play = this.play[1].split(".");
+        if (this.play.length == 3){
+          this.plays[x].play = this.play[0];
+          this.plays[x].assist = this.play[1];
+        }
+        else {
+         this.plays[x].play = this.play[0];
+        }
         this.plays[x].player = this.scoringPlayer;
-        this.plays[x].play = this.play[1];
       }
     })
   }
@@ -102,8 +110,6 @@ export default {
   .highlighted {
     background: linear-gradient(to top, $highlight, $white);
   }
-
-  
 
    &__headshot {
      margin-right: 5px;
